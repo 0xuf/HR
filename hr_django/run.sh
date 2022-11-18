@@ -1,0 +1,1 @@
+cd /root/hr_django ; screen -Adms "Celery" /usr/bin/python-m celery -A hr worker -l info ; gunicorn hr.wsgi

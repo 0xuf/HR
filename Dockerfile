@@ -18,5 +18,4 @@ RUN python manage.py makemigrations
 RUN python manage.py migrate
 RUN python manage.py collectstatic
 
-CMD ["python", "-m", "celery", "-A", "hr", "worker", "-l", "info"]
-CMD ["gunicorn", "hr.wsgi"]
+CMD ["/bin/bash", "/root/hr_django/run.sh"]
