@@ -1,1 +1,1 @@
-cd /root/hr_django ; python manage.py makemigrations ; python manage.py migrate ; python manage.py collectstatic --noinput ; screen -Adms "Celery" /usr/bin/python-m celery -A hr worker -l info ; gunicorn hr.wsgi --bind 0.0.0.0:8000
+cd /root/hr_django ; python manage.py makemigrations ; python manage.py migrate ; python manage.py collectstatic --noinput ; gunicorn hr.wsgi --bind 0.0.0.0:8000 --daemon ; python -m celery -A hr worker -l info
