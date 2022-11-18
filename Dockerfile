@@ -5,7 +5,10 @@ ADD ./hr_django /root/hr_django
 ADD nginx/default.conf /etc/nginx/conf.d/default.conf
 WORKDIR "/root/hr_django"
 
-
+RUN apk add --no-cache build-base
+RUN apk add --no-cache python3 ; ln -sf python3 /usr/bin/python
+RUN apk add --no-cache py3-pip
+RUN apk add --no-cache python3-dev
 RUN pip install -r requirements.txt
 RUN apk add --no-cache go
 RUN apk add --no-cache screen
