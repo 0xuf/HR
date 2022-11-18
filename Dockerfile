@@ -14,8 +14,5 @@ WORKDIR "/root/hr_django"
 
 RUN pip install -r requirements.txt
 RUN apt update -y
-RUN python manage.py makemigrations
-RUN python manage.py migrate
-RUN python manage.py collectstatic
 
 CMD ["/bin/bash", "/root/hr_django/run.sh"]
