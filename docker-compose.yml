@@ -3,19 +3,25 @@ services:
   redis:
     image: redis:latest
     container_name: "redis"
-    expose:
-      - 6379
+    ports:
+      - "6379"
 
   django_app:
     build: .
     container_name: hr_django
     restart: always
-    expose:
-      - 8000
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "8000"
 
   nginx:
     build: ./nginx
     container_name: nginx
     restart: always
+    depends_on:
+      - django_app
     ports:
       - "80:80"
