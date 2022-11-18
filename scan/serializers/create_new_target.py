@@ -4,13 +4,23 @@ from uuid import uuid4
 
 
 class CreateNewTargetSerializer(serializers.ModelSerializer):
-
+    """
+    Create new target serializer
+    """
     class Meta:
+        """
+        Meta class
+        """
         model = Target
         fields = ["domain"]
 
-    def create(self, validated_data):
+    def create(self, validated_data) -> dict:
+        """
+        Override create method to create customized object in database
+        :param validated_data: retrieve validated_data from request
+        """
 
+        # Create instance and save into database
         target = Target(
             user=self.context.get("user"),
             domain=validated_data.get("domain"),
@@ -22,11 +32,23 @@ class CreateNewTargetSerializer(serializers.ModelSerializer):
 
 
 class ViewTargetSerializer(serializers.ModelSerializer):
+    """
+    View target serializer
+    """
     class Meta:
+        """
+        Meta class
+        """
         model = Target
         exclude = ["user", "id", "updated_at"]
 
-    def to_representation(self, instance):
+    def to_representation(self, instance) -> dict:
+        """
+        Override to_representation method to customize response
+        :param instance: received instance object from request
+        """
+
+        # Customized response
         response_dict = dict()
         response_dict["domain"] = instance.domain
         response_dict["date"] = instance.created_at.strftime("%Y-%m-%d")
