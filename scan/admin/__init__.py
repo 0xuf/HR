@@ -8,5 +8,6 @@ from scan.models import (
     Subdomain as SubdomainModel
 )
 
+# Add models into django admin panel
 admin.site.register(TargetModel, TargetAdmin)
 admin.site.register(SubdomainModel, SubdomainAdmin)
