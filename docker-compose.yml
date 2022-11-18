@@ -10,12 +10,16 @@ services:
     build: .
     container_name: django_app
     restart: always
-    ports:
-      - "8000"
+    expose:
+      - 8000
 
   nginx:
     build: ./nginx
     container_name: nginx
     restart: always
+    depends_on:
+      - django_app
+    links:
+      - django_app
     ports:
       - "80:80"
