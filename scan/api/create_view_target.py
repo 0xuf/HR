@@ -19,12 +19,14 @@ class CreateViewTarget(ListCreateAPIView):
     def get_queryset(self):
         return Target.objects.filter(user=self.request.user)  # noqa
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs) -> Response:
         """
         Create method to create target in database using CreateNewTargetSerializer
         """
+        # Define _uuid variable
         _uuid = uuid4()
 
+        # Pass data into create target serializer
         serialized_data = self.create_target_serializer(data=dict(
             domain=self.request.POST.get("domain")
         ),
@@ -37,7 +39,9 @@ class CreateViewTarget(ListCreateAPIView):
         # Check if the values are valid, return a response with a status code of 201, and if it is wrong, 400
         if serialized_data.is_valid():
             serialized_data.save()
+            # Start scan in background
             scan_target.delay(serialized_data.data.get("domain"))
+
             return Response({"scan_id": _uuid}, status=status.HTTP_201_CREATED)
 
         return Response(serialized_data.errors, status=status.HTTP_400_BAD_REQUEST)
