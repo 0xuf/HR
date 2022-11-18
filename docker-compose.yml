@@ -10,10 +10,6 @@ services:
     build: .
     container_name: hr_django
     restart: always
-    links:
-      - redis
-    depends_on:
-      - redis
     ports:
       - "8000"
 
@@ -21,7 +17,5 @@ services:
     build: ./nginx
     container_name: nginx
     restart: always
-    depends_on:
-      - django_app
     ports:
       - "80:80"
