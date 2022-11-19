@@ -48,7 +48,7 @@ class GetResult(RetrieveAPIView):
         response_dict["previous"] = requested_url + f"?page_num={page_num-1}" if page_num > 1 else None
         response_dict["date"] = serialized_data.data.get("date")
         response_dict["subdomains"] = paginated_data.get("output")[page_num-1] \
-            if len(paginated_data.get("output")) > 0 else dict()
+            if len(paginated_data.get("output")) > 0 else list()
 
         return Response(response_dict, status=status.HTTP_200_OK)
 
