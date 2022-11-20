@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from scan.models import Target
-from uuid import uuid4
+from django.utils.translation import gettext as _
+import validators
 
 
 class CreateNewTargetSerializer(serializers.ModelSerializer):
@@ -19,6 +20,10 @@ class CreateNewTargetSerializer(serializers.ModelSerializer):
         Override create method to create customized object in database
         :param validated_data: retrieve validated_data from request
         """
+
+        # Validate entered domain
+        if not validators.domain(validated_data.get("domain")):
+            raise serializers.ValidationError(_("Enter valid domain"))
 
         # Create instance and save into database
         target = Target(
