@@ -1,6 +1,6 @@
 # Hamravesh Task
 ## This script takes the target (domain) from the user and obtains all the subdomains using the subfinder tool.
-Then, using the nuclei tool, using its templates, the tool displays the information and vulnerabilities in the templates for us.
+## Then, using the nuclei tool, using its templates, the tool displays the information and vulnerabilities in the templates for us.
 
 ## Installation
 ```bash
