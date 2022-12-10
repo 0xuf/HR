@@ -20,4 +20,4 @@ after register you can get your token address from: http://your_server/api/user/
 After receiving the token, you can login in the Authorize section at the top of the page with this format: Bearer ReceivedToken
 ```
 
-Hope you enjoy it ;)
+Hope you like it ;)
